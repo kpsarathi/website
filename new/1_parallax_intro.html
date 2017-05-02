@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>1: Parallax Intro</title>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="assets/header.css">
+    <style>
+    /*  Page styles  */
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        overflow-x:hidden;
+    }
+    
+    body {
+        font: normal 14px/1.4 Arial, Helvetica, sans-serif;
+    }
+    
+    .skrollr-desktop body {
+        height: 100% !important;
+    }
+    
+    #skrollr-body {
+        height: 100%;
+        overflow: visible;
+        position: relative;
+    }
+    /*  Styles for this example */
+    
+    .parallax-image.skrollable-between {
+        display: block;
+    }
+    
+    .no-skrollr .parallax-image-wrapper {
+        display: none !important;
+    }
+    
+    .parallax-image-wrapper {
+        position: fixed;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        height: 80vh;
+        top: -80vh;
+    }
+    
+    .parallax-image {
+        display: none;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        height: 100vh;
+        top: 0;
+    }
+    
+    .parallax-image.skrollable-between {
+        display: block;
+    }
+    
+    .no-skrollr .parallax-image-wrapper {
+        display: none !important;
+    }
+    
+    .gap {
+        background: transparent center no-repeat;
+        background-size: cover;
+        height: 80vh;
+    }
+    
+    .skrollr .gap {
+        background: transparent !important;
+    }
+    
+    #page-intro h1 {
+        text-align: center;
+        color: #fff;
+        font: normal 60px 'Droid Serif', sans-serif;
+        padding-top: 24vh;
+    }
+    
+    @media (max-width: 800px) {
+        #page-intro h1 {
+            font-size: 42px;
+            padding-top: 15vh;
+        }
+    }
+    
+    #page-intro .btn {
+        color: #fff !important;
+        display: block;
+        margin: 40px auto;
+        width: 200px;
+        text-align: center;
+        border: 1px solid #fff;
+        padding: 18px 20px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    
+    .body-text {
+        padding: 200px 0;
+        background-color: #fff;
+        color: #25373C;
+        font-size: 18px;
+        min-height: 100vh;
+        text-align: center;
+    }
+    
+    .body-text h2 {
+        font-size: 42px;
+        font-weight: normal;
+        margin-bottom: 80px;
+    }
+    
+    .body-text p {
+        width: 28%;
+        display: inline-block;
+        text-align: left;
+        padding: 20px;
+        color: #45636B;
+    }
+    
+    @media (max-width: 900px) {
+        .body-text p {
+            width: 100%;
+        }
+    }
+    
+    .features-list {
+        padding: 150px 0;
+        background-color: #fff;
+        color: #25373C;
+        font-size: 18px;
+        min-height: 100vh;
+        text-align: center;
+    }
+    
+    .features-list h2 {
+        font-size: 42px;
+        margin-bottom: 80px;
+        font-weight: normal;
+    }
+    
+    .features-list div {
+        display: inline-block;
+        width: 30%;
+        margin: 5px;
+        border: 1px solid #ccc;
+        padding: 45px;
+        box-shadow: 1px 1px 1px #ccc, 0 0 30px #eee inset;
+    }
+    
+    .features-list div i {
+        font-size: 150px;
+        margin-bottom: 40px;
+        color: #50B575;
+    }
+    
+    .features-list div h4 {
+        font-size: 18px;
+        text-transform: uppercase;
+        color: #425F67;
+        font-weight: normal;
+    }
+    
+    @media (max-width: 900px) {
+        .features-list div {
+            width: 90%;
+            margin-bottom: 30px;
+        }
+    }
+    
+    .about-us {
+        padding: 150px 0;
+        background-color: #fff;
+        min-height: 120vh;
+        text-align: center;
+        color: #25373C;
+        font-size: 18px;
+    }
+    
+    .about-us h2 {
+        font-size: 42px;
+        margin-bottom: 80px;
+        font-weight: normal;
+    }
+    
+    .about-us div {
+        text-align: center;
+        width: 25%;
+        margin: 30px 10px;
+        display: inline-block;
+    }
+    
+    .about-us div img {
+        border-radius: 50%;
+        width: 60%;
+    }
+    
+    .about-us a.attribution {
+        display: block;
+        font-size: 13px;
+        text-decoration: none;
+        color: inherit;
+        width: 280px;
+        margin: 50px auto 10px;
+        opacity: 0.5;
+    }
+    
+    @media (max-width: 800px) {
+        .about-us div {
+            width: 45%;
+            margin: 20px 0;
+        }
+    }
+    
+    .gallery {
+        background-color: #fff;
+        color: #221f51;
+        font: normal 24px sans-serif;
+        min-height: 300vh;
+        text-align: center;
+        overflow: hidden;
+    }
+    
+    .scroll-pause {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        padding-top: 20vh;
+    }
+    
+    .scroll-pause .row {
+        width: 200vw;
+        height: 30vh;
+        overflow: hidden;
+    }
+    
+    .scroll-pause .row div {
+        width: 11.5%;
+        height: 90%;
+        float: left;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        margin: 0.5%;
+        border-radius: 10px;
+    }
+    
+    .scroll-pause .row div:first-child {
+        margin-left: 0.4%;
+    }
+    
+    .scroll-pause .row div:last-child {
+        margin-right: 0.4%;
+    }
+    </style>
+</head>
+
+<!-- <body>
+    <div class="parallax-image-wrapper" data-anchor-target="#page-intro" data-bottom-top="transform:translateY(200%)" data-top-bottom="transform:translateY(0)">
+        <div class="parallax-image" style="background-image:url(assets/images/coast.jpg)" data-anchor-target="#page-intro" data-bottom-top="transform: translateY(-80%);" data-top-bottom="transform: translateY(80%);">
+        </div>
+    </div>
+    <div id="skrollr-body">
+        <div id="page-intro" class="gap" style="background-image:url(assets/images/coast.jpg); ">
+            <h1>TECH 42 LABS</h1>
+            <a href="http://tutorialzine.com/2015/09/6-practical-examples-for-building-parallax-websites/" class="btn">Download it</a>
+        </div>
+        <div class="body-text">
+            <h2>Body Text</h2>
+            <p data-300-center-top="transform: scale(0.8); opacity: 0" data-300-center-center="transform: scale(1); opacity: 1">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras gravida in odio vel tincidunt. Fusce quis lectus accumsan, accumsan nibh sed, aliquet purus. In vitae velit eu est cursus malesuada sed ut nibh. Curabitur a leo enim.
+            </p>
+            <p data-200-center-top="transform: scale(0.8); opacity: 0" data-200-center-center="transform: scale(1); opacity: 1">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras gravida in odio vel tincidunt. Fusce quis lectus accumsan, accumsan nibh sed, aliquet purus. In vitae velit eu est cursus malesuada sed ut nibh. Curabitur a leo enim.
+            </p>
+            <p data-100-center-top="transform: scale(0.8); opacity: 0" data-100-center-center="transform: scale(1); opacity: 1">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras gravida in odio vel tincidunt. Fusce quis lectus accumsan, accumsan nibh sed, aliquet purus. In vitae velit eu est cursus malesuada sed ut nibh. Curabitur a leo enim.
+            </p>
+        </div>
+
+        <div class="gap" style="background-image:url(assets/images/palmtrees.jpg); "></div>
+        <div class="features-list">
+
+        <h2>Features</h2>
+
+        <div data-100-bottom-top="transform: translateX(-200px); opacity: 0" data-center-top="transform: translateX(0px); opacity: 1" class="skrollable skrollable-before" style="transform: translateX(-200px); opacity: 0;">
+            <i class="material-icons">cloud_done</i>
+            <h4>10 GB of free <b>cloud storage</b></h4>
+        </div>
+
+        <div data-100-bottom-top="transform: translateY(200px); opacity: 0" data-center-top="transform: translateY(0px); opacity: 1" class="skrollable skrollable-before" style="transform: translateY(200px); opacity: 0;">
+            <i class="material-icons">public</i>
+            <h4>Servers in over <b>45 locations</b></h4>
+        </div>
+
+        <div data-100-bottom-top="transform: translateX(200px); opacity: 0" data-center-top="transform: translateX(0px); opacity: 1" class="skrollable skrollable-before" style="transform: translateX(200px); opacity: 0;">
+            <i class="material-icons">security</i>
+            <h4>Guaranteed <b>data protection</b></h4>
+        </div>
+
+    </div>
+    </div>
+    <script src="assets/skrollr.min.js"></script>
+    <script>
+    skrollr.init();
+    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.tutorialzine.com/misc/enhance/v3.js" async></script>
+</body> -->
+<body style="height: 8193px;"><div id="bsaHolder"><a id="bsa_closeAd" title="Hide this ad!" href=""></a><script id="_adpacks_js" type="text/javascript" async="" src="http://cdn.adpacks.com/adpacks.js?legacyid=1259038&amp;zoneid=1386&amp;key=fe75131c335e3bd42585d699208c59c8&amp;serve=C6SI42Y&amp;placement=tutorialzinecom&amp;circle=dev"></script></div>
+
+
+
+
+<div class="parallax-image-wrapper skrollable skrollable-after" data-anchor-target="#page-intro" data-bottom-top="transform:translateY(200%)" data-top-bottom="transform:translateY(0)" style="transform: translateY(0px);">
+
+    <div class="parallax-image skrollable skrollable-after" style="background-image: url(&quot;assets/images/coast.jpg&quot;); transform: translateY(80%);" data-anchor-target="#page-intro" data-bottom-top="transform: translateY(-80%);" data-top-bottom="transform: translateY(80%);">
+
+    </div>
+</div>
+<div class="parallax-image-wrapper skrollable skrollable-between" data-anchor-target=".body-text + .gap" data-bottom-top="transform:translateY(200%)" data-top-bottom="transform:translateY(0)" style="transform: translateY(66.8389%);">
+
+    <div class="parallax-image skrollable skrollable-between" style="background-image: url(&quot;assets/images/palmtrees.jpg&quot;); transform: translateY(26.5289%);" data-anchor-target=".body-text + .gap" data-bottom-top="transform: translateY(-80%);" data-top-bottom="transform: translateY(80%);">
+
+    
+</div></div>
+<div class="parallax-image-wrapper skrollable skrollable-between" data-anchor-target=".features-list + .gap" data-bottom-top="transform:translateY(200%)" data-top-bottom="transform:translateY(0)" style="transform: translateY(54.9526%);">
+
+    <div class="parallax-image skrollable skrollable-between" style="background-image: url(&quot;assets/images/bay.jpg&quot;); transform: translateY(36.0379%);" data-anchor-target=".features-list + .gap" data-bottom-top="transform: translateY(-80%);" data-top-bottom="transform: translateY(80%);">
+
+    </div>
+</div>
+<div class="parallax-image-wrapper skrollable skrollable-before" data-anchor-target=".about-us + .gap" data-bottom-top="transform:translateY(200%)" data-top-bottom="transform:translateY(0)" style="transform: translateY(200%);">
+
+    <div class="parallax-image skrollable skrollable-before" style="background-image: url(&quot;assets/images/sea.jpg&quot;); transform: translateY(-80%);" data-anchor-target=".about-us + .gap" data-bottom-top="transform: translateY(-80%);" data-top-bottom="transform: translateY(80%);">
+
+    </div>
+</div>
+
+<div id="skrollr-body">
+
+    <div id="page-intro" class="gap" style="background-image:url(assets/images/coast.jpg); ">
+        <h1>TECH 42 LABS</h1>
+        <!-- <a href="http://tutorialzine.com/2015/09/6-practical-examples-for-building-parallax-websites/" class="btn">Download it</a> -->
+    </div>
+
+    <div class="body-text content">
+
+        <h2>Body Text</h2>
+
+        <p data-300-center-top="transform: scale(0.8); opacity: 0" data-300-center-center="transform: scale(1); opacity: 1" class="skrollable skrollable-after" style="transform: scale(1); opacity: 1;">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras gravida in odio vel tincidunt. Fusce quis lectus accumsan, accumsan nibh sed, aliquet purus. In vitae velit eu est cursus malesuada sed ut nibh. Curabitur a leo enim.
+        </p>
+
+
+        <p data-200-center-top="transform: scale(0.8); opacity: 0" data-200-center-center="transform: scale(1); opacity: 1" class="skrollable skrollable-after" style="transform: scale(1); opacity: 1;">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras gravida in odio vel tincidunt. Fusce quis lectus accumsan, accumsan nibh sed, aliquet purus. In vitae velit eu est cursus malesuada sed ut nibh. Curabitur a leo enim.
+        </p>
+
+        <p data-100-center-top="transform: scale(0.8); opacity: 0" data-100-center-center="transform: scale(1); opacity: 1" class="skrollable skrollable-after" style="transform: scale(1); opacity: 1;">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras gravida in odio vel tincidunt. Fusce quis lectus accumsan, accumsan nibh sed, aliquet purus. In vitae velit eu est cursus malesuada sed ut nibh. Curabitur a leo enim.
+        </p>
+
+    </div>
+
+    <div class="gap" style="background-image:url(assets/images/palmtrees.jpg); "></div>
+
+    <div class="features-list">
+
+        <h2>Features</h2>
+
+        <div data-100-bottom-top="transform: translateX(-200px); opacity: 0" data-center-top="transform: translateX(0px); opacity: 1" class="skrollable skrollable-after" style="transform: translateX(0px); opacity: 1;">
+            <i class="material-icons">cloud_done</i>
+            <h4>10 GB of free <b>cloud storage</b></h4>
+        </div>
+
+        <div data-100-bottom-top="transform: translateY(200px); opacity: 0" data-center-top="transform: translateY(0px); opacity: 1" class="skrollable skrollable-after" style="transform: translateY(0px); opacity: 1;">
+            <i class="material-icons">public</i>
+            <h4>Servers in over <b>45 locations</b></h4>
+        </div>
+
+        <div data-100-bottom-top="transform: translateX(200px); opacity: 0" data-center-top="transform: translateX(0px); opacity: 1" class="skrollable skrollable-after" style="transform: translateX(0px); opacity: 1;">
+            <i class="material-icons">security</i>
+            <h4>Guaranteed <b>data protection</b></h4>
+        </div>
+
+    </div>
+
+    <div class="gap" style="background-image:url(assets/images/bay.jpg); "></div>
+
+
+    <div class="about-us">
+
+        <h2>About us</h2>
+
+        <div data-150-bottom-center="transform: rotate(-90deg); opacity: 0" data-150-center-center="transform: rotate(0); opacity: 1" class="skrollable skrollable-between" style="transform: rotate(-57.3994deg); opacity: 0.362229;">
+            <img src="assets/images/avatars/1.jpg" alt="avatar">
+        </div>
+
+        <div data-100-bottom-center="transform: rotate(-90deg); opacity: 0" data-100-center-center="transform: rotate(0); opacity: 1" class="skrollable skrollable-between" style="transform: rotate(-71.3313deg); opacity: 0.20743;">
+            <img src="assets/images/avatars/2.jpg" alt="avatar">
+        </div>
+
+        <div data-50-bottom-center="transform: rotate(-90deg); opacity: 0" data-50-center-center="transform: rotate(0); opacity: 1" class="skrollable skrollable-before" style="transform: rotate(-90deg); opacity: 0;">
+            <img src="assets/images/avatars/3.jpg" alt="avatar">
+        </div>
+
+        <div data-150-bottom-center="transform: rotateY(-90deg); opacity: 0" data-150-center-center="transform: rotate(0); opacity: 1" class="skrollable skrollable-before" style="transform: rotateY(-90deg); opacity: 0;">
+            <img src="assets/images/avatars/4.jpg" alt="avatar">
+        </div>
+
+        <div data-100-bottom-center="transform: rotateY(-90deg); opacity: 0" data-100-center-center="transform: rotate(0); opacity: 1" class="skrollable skrollable-before" style="transform: rotateY(-90deg); opacity: 0;">
+            <img src="assets/images/avatars/5.jpg" alt="avatar">
+        </div>
+
+        <div data-50-bottom-center="transform: rotateY(-90deg); opacity: 0" data-50-center-center="transform: rotate(0); opacity: 1" class="skrollable skrollable-before" style="transform: rotateY(-90deg); opacity: 0;">
+            <img src="assets/images/avatars/6.jpg" alt="avatar">
+        </div>
+
+        <a class="attribution" href="http://www.freepik.com/free-photos-vectors/icon">Icon vectors designed by Freepik</a>
+
+    </div>
+
+    <div class="gap" style="background-image:url(assets/images/sea.jpg);"></div>
+
+    <div class="gallery"></div>
+
+
+    <footer>
+
+        <div class="footer-left">
+
+            <h3>Companylogo</h3>
+
+            <p class="footer-links">
+                <a href="#">Home</a>
+                ·
+                <a href="#">Blog</a>
+                ·
+                <a href="#">Pricing</a>
+                ·
+                <a href="#">About</a>
+                ·
+                <a href="#">Faq</a>
+                ·
+                <a href="#">Contact</a>
+            </p>
+
+            <p class="footer-company-name">Company Name © 2015</p>
+
+        </div>
+
+        <div class="footer-right skrollable skrollable-before" data-bottom-top="max-width: 200px;" data-bottom-bottom="max-width: 600px;" style="max-width: 200px;">
+
+            <form method="get" action="#">
+                <input placeholder="Search our website">
+                <i class="material-icons">search</i>
+            </form>
+
+        </div>
+
+    </footer>
+
+
+</div>
+
+
+
+
+<div class="scroll-pause skrollable skrollable-before" data-anchor-target=".gallery" data-100p-top-top="transform:translateY(100%);" data-top-top="transform:translateY(0%)" data--150p-top-top="" data--300p-top-top="transform:translateY(-100%)" style="transform: translateY(100%);">
+
+    <div class="row skrollable skrollable-before" data-anchor-target=".gallery" data-top-top="transform: translateX(0%);" data--150p-top-top="transform: translateX(-50%);" style="transform: translateX(0%);">
+        <div style="background-image:url(assets/images/small/coast.jpg);"></div>
+
+        <div style="background-image:url(assets/images/small/palmtrees.jpg);"></div>
+
+        <div style="background-image:url(assets/images/small/bay.jpg);"></div>
+
+        <div style="background-image:url(assets/images/small/sea.jpg);"></div>
+
+        <div style="background-image:url(assets/images/small/coast.jpg);"></div>
+
+        <div style="background-image:url(assets/images/small/palmtrees.jpg);"></div>
+
+        <div style="background-image:url(assets/images/small/bay.jpg);"></div>
+
+        <div style="background-image:url(assets/images/small/sea.jpg);"></div>
+    </div>
+
+
+    <div class="row skrollable skrollable-before" data-anchor-target=".gallery" data-top-top="transform: translateX(-50%);" data--150p-top-top="transform: translateX(0);" style="transform: translateX(-50%);">
+
+        <div style="background-image:url(assets/images/small/sea.jpg);"></div>
+
+        <div style="background-image:url(assets/images/small/bay.jpg);"></div>
+
+        <div style="background-image:url(assets/images/small/palmtrees.jpg);"></div>
+
+        <div style="background-image:url(assets/images/small/coast.jpg);"></div>
+
+        <div style="background-image:url(assets/images/small/sea.jpg);"></div>
+
+        <div style="background-image:url(assets/images/small/bay.jpg);"></div>
+
+        <div style="background-image:url(assets/images/small/palmtrees.jpg);"></div>
+
+        <div style="background-image:url(assets/images/small/coast.jpg);"></div>
+
+    </div>
+
+</div>
+
+
+
+<script src="assets/skrollr.min.js"></script>
+
+<script>
+    skrollr.init();
+</script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.tutorialzine.com/misc/enhance/v2.js" async=""></script>
+
+
+</body>
+</html>
